@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ved Sinha - Portfolio</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&amp;family=DM+Sans:ital,wght@0,400;0,500;1,400&amp;display=swap" rel="stylesheet">
+  <style>
+    html, body { height: 100%; margin: 0; }
+    * { box-sizing: border-box; }
+    
+    /* Icon styling for education section */
+    .edu-icon { margin-right: 8px; display: inline-block; vertical-align: middle; }
+
+    .portfolio-wrap {
+      font-family: 'DM Sans', sans-serif;
+      height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    .heading-font { font-family: 'Syne', sans-serif; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes slideRight {
+      from { opacity: 0; transform: translateX(-60px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    @keyframes grain {
+      0%, 100% { transform: translate(0,0); }
+      10% { transform: translate(-2%,-2%); }
+      30% { transform: translate(3%,1%); }
+      50% { transform: translate(-1%,3%); }
+      70% { transform: translate(2%,-1%); }
+      90% { transform: translate(-3%,2%); }
+    }
+
+    .anim-fade-up { animation: fadeUp 0.8s ease-out both; }
+    .anim-fade-up-d1 { animation: fadeUp 0.8s 0.15s ease-out both; }
+    .anim-fade-up-d2 { animation: fadeUp 0.8s 0.3s ease-out both; }
+    .anim-fade-up-d3 { animation: fadeUp 0.8s 0.45s ease-out both; }
+    .anim-fade-up-d4 { animation: fadeUp 0.8s 0.6s ease-out both; }
+    .anim-scale-in { animation: scaleIn 0.7s 0.2s ease-out both; }
+    .anim-slide-right { animation: slideRight 0.8s ease-out both; }
+    .anim-float { animation: float 4s ease-in-out infinite; }
+
+    .grain-overlay::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 128px;
+      animation: grain 8s steps(10) infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .project-card {
+      transition: transform 0.4s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.4s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-8px) scale(1.02);
+    }
+
+    .nav-link {
+      position: relative;
+      transition: color 0.3s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #7C83FF;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    .nav-link.active-section::after {
+      width: 100%;
+    }
+
+    .skill-pill {
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .skill-pill:hover {
+      transform: translateY(-3px);
+    }
+
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .scroll-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .skills-tab {
+      cursor: pointer;
+    }
+    .skills-tab.active {
+      color: #7C83FF !important;
+      border-bottom-color: #7C83FF !important;
+    }
+
+    .work-tab {
+      cursor: pointer;
+    }
+    .work-tab.active {
+      color: #7C83FF !important;
+      border-bottom-color: #7C83FF !important;
+    }
+
+    .tab-pane {
+      animation: fadeUp 0.4s ease-out;
+    }
+    .tab-pane.hidden {
+      display: none;
+    }
+
+    .success-message {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #CD0000;
+      color: #0A0A0C;
+      padding: 16px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      animation: slideInRight 0.4s ease-out;
+      z-index: 1000;
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(100px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div class="portfolio-wrap w-full" id="portfolio-wrap"><!-- Nav -->
+   <nav class="fixed top-0 left-0 w-full z-50 backdrop-blur-md border-b" id="nav-bar" style="background: rgba(15,15,18,0.95); border-color: rgba(205,0,0,0.1);">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between"><a href="#hero" class="heading-font font-800 text-xl tracking-tight" id="nav-name" style="color:#7C83FF;">V.S</a>
+     <div class="flex gap-8 text-sm font-medium"><a href="#about" class="nav-link" id="nav-about" style="color:#FFFFFF;">About</a> <a href="#education" class="nav-link" id="nav-education" style="color:#FFFFFF;">Education</a> <a href="#skills" class="nav-link" id="nav-work" style="color:#FFFFFF;">Skills</a> <a href="#work" class="nav-link" id="nav-portfolio" style="color:#FFFFFF;">Work</a> <a href="#contact" class="nav-link" id="nav-contact" style="color:#FFFFFF;">Contact</a>
+     </div>
+     <div class="flex items-center gap-6">
+      <div class="flex gap-4"><a href="https://www.linkedin.com/in/vedsinha09" target="_blank" rel="noopener noreferrer" class="nav-icon transition-all hover:scale-110" style="color:#7C83FF;" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:20px;height:20px;"></i></a> <a href="https://www.instagram.com/ved.official.in" target="_blank" rel="noopener noreferrer" class="nav-icon transition-all hover:scale-110" style="color:#7C83FF;" aria-label="Instagram"><i data-lucide="instagram" style="width:20px;height:20px;"></i></a> <a href="https://github.com/VedSinha09" target="_blank" rel="noopener noreferrer" class="nav-icon transition-all hover:scale-110" style="color:#7C83FF;" aria-label="GitHub"><i data-lucide="github" style="width:20px;height:20px;"></i></a>
+      </div>
+     </div>
+    </div>
+   </nav><!-- Hero -->
+   <section id="hero" class="relative grain-overlay w-full flex items-center justify-center" style="min-height: 100%; background: #0A0A0C;"><!-- Decorative shapes -->
+    <div class="absolute top-20 right-10 w-48 h-48 rounded-full opacity-20 blur-3xl anim-float" style="background:#7C83FF;"></div>
+    <div class="absolute bottom-20 left-10 w-32 h-32 rounded-full opacity-10 blur-2xl anim-float" style="background:#7C83FF; animation-delay:2s;"></div>
+    <div class="relative z-10 max-w-5xl mx-auto px-6 py-32 text-center">
+     <p class="text-sm uppercase tracking-[0.3em] mb-6 anim-fade-up" id="hero-greeting" style="color:#7C83FF;">Hello, I'm</p>
+     <h1 class="heading-font font-900 leading-[0.95] mb-6 anim-fade-up-d1 uppercase" id="hero-name" style="color:#7C83FF; font-size: clamp(3rem, 8vw, 7rem); letter-spacing: 0.05em;">VED SINHA</h1>
+     <p class="text-xl md:text-2xl font-medium mb-8 anim-fade-up-d2" id="hero-tagline" style="color:#FFFFFF;">Digital Designer &amp; Creative Developer</p>
+     <p class="max-w-xl mx-auto text-base mb-10 anim-fade-up-d3" id="hero-description" style="color:#FFFFFF;">Leaning into the world of AI, expanding capabilities and creating breathe taking content</p>
+     <div class="flex gap-4 justify-center anim-fade-up-d4"><a href="#work" class="inline-flex items-center gap-2 px-7 py-3 rounded-full font-semibold text-sm transition-all hover:scale-105" id="hero-cta" style="background:#7C83FF; color:#0A0A0C;"> View Work <i data-lucide="arrow-down" style="width:16px;height:16px;"></i> </a> <a href="#contact" class="inline-flex items-center gap-2 px-7 py-3 rounded-full font-semibold text-sm border transition-all hover:scale-105" style="border-color:#7C83FF; color:#7C83FF;"> Get in Touch <i data-lucide="arrow-down" style="width:16px;height:16px;"></i> </a>
+     </div>
+    </div>
+   </section><!-- About -->
+   <section id="about" class="relative w-full" style="background:#1A1A1E;">
+    <div class="max-w-5xl mx-auto px-6 py-28">
+     <div class="scroll-reveal">
+      <h2 class="heading-font font-700 text-4xl md:text-5xl mb-10" id="about-heading" style="color:#7C83FF;">A little about me</h2>
+     </div>
+     <div class="grid md:grid-cols-2 gap-12 items-start">
+      <div class="scroll-reveal">
+       <p class="text-lg leading-relaxed" id="about-text" style="color:#FFFFFF;">"I am currently pursuing a B.Tech at Gautam Buddha University with a strong interest in program development, web page design, and digital content creation. Over the past four years, I have been learning multiple programming languages and exploring technologies to strengthen my development and problem-solving skills."</p>
+      </div>
+      <div class="scroll-reveal">
+       <p class="text-sm uppercase tracking-[0.2em] mb-5 font-semibold" style="color:#7C83FF;">Core Skills</p>
+       <div class="flex flex-wrap gap-3" id="skills-container"><span class="skill-pill px-4 py-2 rounded-full text-sm font-medium" style="background:rgba(124,131,255,0.1); color:#7C83FF; border:1px solid rgba(124,131,255,0.2);">Web Dev</span> <span class="skill-pill px-4 py-2 rounded-full text-sm font-medium" style="background:rgba(124,131,255,0.1); color:#7C83FF; border:1px solid rgba(124,131,255,0.2);">Video Editor</span> <span class="skill-pill px-4 py-2 rounded-full text-sm font-medium" style="background:rgba(124,131,255,0.1); color:#7C83FF; border:1px solid rgba(124,131,255,0.2);">Program Developer</span> <span class="skill-pill px-4 py-2 rounded-full text-sm font-medium" style="background:rgba(124,131,255,0.1); color:#7C83FF; border:1px solid rgba(124,131,255,0.2);">Website Designer</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Education -->
+   <section id="education" class="relative w-full" style="background:#0F0F12;">
+    <div class="max-w-5xl mx-auto px-6 py-28">
+     <div class="scroll-reveal">
+      <h2 class="heading-font font-700 text-5xl md:text-6xl mb-14" style="color:#7C83FF;">Academic Path</h2>
+     </div><!-- Education Timeline -->
+     <div class="space-y-8"><!-- University -->
+      <div class="scroll-reveal rounded-2xl p-8 border transition-all hover:border-opacity-100" style="background:#1A1A1E; border-color:rgba(124,131,255,0.3);">
+       <div class="flex items-start justify-between mb-4">
+        <div class="flex items-start gap-3"><i data-lucide="building-2" class="edu-icon" style="width:24px;height:24px;color:#7C83FF;flex-shrink:0;margin-top:2px;"></i>
+         <div>
+          <p class="text-xl font-semibold" style="color:#7C83FF;">Gautam Buddha University</p>
+          <p class="text-base" style="color:#FFFFFF;">Bachelors of Technology, Computer Science Engineering</p>
+         </div>
+        </div>
+        <div class="flex flex-col items-end gap-2">
+         <p class="text-sm font-medium px-4 py-2 rounded-full" style="background:rgba(124,131,255,0.1); color:#7C83FF; border:1px solid rgba(124,131,255,0.2);">In Progress</p>
+         <p class="text-xs" style="color:#808080;">05 Jul, 2025</p>
+        </div>
+       </div>
+       <p class="text-base" style="color:#FFFFFF;">Greater Noida, India</p>
+      </div><!-- Sri Ram Global School -->
+      <div class="scroll-reveal rounded-2xl p-8 border transition-all hover:border-opacity-100" style="background:#1A1A1E; border-color:rgba(124,131,255,0.3);">
+       <div class="flex items-start justify-between mb-4">
+        <div class="flex items-start gap-3"><i data-lucide="book-open" class="edu-icon" style="width:24px;height:24px;color:#7C83FF;flex-shrink:0;margin-top:2px;"></i>
+         <div>
+          <p class="text-xl font-semibold" style="color:#7C83FF;">Sri Ram Global School</p>
+          <p class="text-base" style="color:#FFFFFF;">Secondary School Education, PCM Stream</p>
+         </div>
+        </div>
+        <div class="flex flex-col items-end gap-2">
+         <p class="text-sm font-medium px-4 py-2 rounded-full" style="background:rgba(124,131,255,0.1); color:#7C83FF; border:1px solid rgba(124,131,255,0.2);">Completed</p>
+         <p class="text-xs" style="color:#808080;">From Aug 2022 – Apr 2024</p>
+        </div>
+       </div>
+       <p class="text-base" style="color:#FFFFFF;">Greater Noida West, India</p>
+      </div><!-- Sarvottam International School -->
+      <div class="scroll-reveal rounded-2xl p-8 border transition-all hover:border-opacity-100" style="background:#1A1A1E; border-color:rgba(124,131,255,0.3);">
+       <div class="flex items-start justify-between mb-4">
+        <div class="flex items-start gap-3"><i data-lucide="book-open" class="edu-icon" style="width:24px;height:24px;color:#7C83FF;flex-shrink:0;margin-top:2px;"></i>
+         <div>
+          <p class="text-xl font-semibold" style="color:#7C83FF;">Sarvottam International School</p>
+          <p class="text-base" style="color:#FFFFFF;">Middle School Education, PCM Stream</p>
+         </div>
+        </div>
+        <div class="flex flex-col items-end gap-2">
+         <p class="text-sm font-medium px-4 py-2 rounded-full" style="background:rgba(124,131,255,0.1); color:#7C83FF; border:1px solid rgba(124,131,255,0.2);">Completed</p>
+         <p class="text-xs" style="color:#808080;">From Apr 2019 – Jul 2024</p>
+        </div>
+       </div>
+       <p class="text-base" style="color:#FFFFFF;">Greater Noida West, India</p>
+      </div><!-- Gyan Bharati School -->
+      <div class="scroll-reveal rounded-2xl p-8 border transition-all hover:border-opacity-100" style="background:#1A1A1E; border-color:rgba(124,131,255,0.3);">
+       <div class="flex items-start justify-between mb-4">
+        <div class="flex items-start gap-3"><i data-lucide="book-open" class="edu-icon" style="width:24px;height:24px;color:#7C83FF;flex-shrink:0;margin-top:2px;"></i>
+         <div>
+          <p class="text-xl font-semibold" style="color:#7C83FF;">Gyan Bharati School</p>
+          <p class="text-base" style="color:#FFFFFF;">Foundational School Education</p>
+         </div>
+        </div>
+        <div class="flex flex-col items-end gap-2">
+         <p class="text-sm font-medium px-4 py-2 rounded-full" style="background:rgba(124,131,255,0.1); color:#7C83FF; border:1px solid rgba(124,131,255,0.2);">Completed</p>
+         <p class="text-xs" style="color:#808080;">From Apr 2011 – Mar 2019</p>
+        </div>
+       </div>
+       <p class="text-base" style="color:#FFFFFF;">New Delhi, India</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Skills -->
+   <section id="skills" class="relative w-full" style="background:#0A0A0C;">
+    <div class="max-w-5xl mx-auto px-6 py-28">
+     <div class="scroll-reveal">
+      <p class="text-sm uppercase tracking-[0.3em] mb-3" style="color:#7C83FF;">Expertise</p>
+      <h2 class="heading-font font-700 text-4xl md:text-5xl mb-14" style="color:#F5F5F0;">Core Learning</h2>
+     </div><!-- Tab Navigation -->
+     <div class="flex gap-6 mb-12 border-b" style="border-color:rgba(255,255,255,0.1);"><button class="skills-tab px-6 py-4 text-sm font-medium transition-all pb-4 active" data-tab="languages" style="color:#FFFFFF; border-bottom:2px solid transparent;"> Languages </button> <button class="skills-tab px-6 py-4 text-sm font-medium transition-all pb-4" data-tab="webdev" style="color:#FFFFFF; border-bottom:2px solid transparent;"> Web Development </button> <button class="skills-tab px-6 py-4 text-sm font-medium transition-all pb-4" data-tab="videoediting" style="color:#FFFFFF; border-bottom:2px solid transparent;"> Video Editing </button>
+     </div><!-- Tab Content -->
+     <div class="skills-tab-content"><!-- Languages Tab -->
+      <div id="languages-tab" class="tab-pane active scroll-reveal">
+       <h3 class="heading-font font-600 text-2xl mb-6" style="color:#7C83FF;">Programming Languages</h3>
+       <div class="rounded-2xl p-8" style="background:#16161A;">
+        <p class="text-lg leading-relaxed" style="color:#FFFFFF;">C, C++, Python, Java, PHP, JS</p>
+       </div>
+      </div><!-- Web Development Tab -->
+      <div id="webdev-tab" class="tab-pane hidden scroll-reveal">
+       <h3 class="heading-font font-600 text-2xl mb-6" style="color:#7C83FF;">Web Development</h3>
+       <div class="rounded-2xl p-8" style="background:#16161A;">
+        <p class="text-lg leading-relaxed" style="color:#FFFFFF;">HTML5, MySQL</p>
+       </div>
+      </div><!-- Video Editing Tab -->
+      <div id="videoediting-tab" class="tab-pane hidden scroll-reveal">
+       <h3 class="heading-font font-600 text-2xl mb-6" style="color:#7C83FF;">Video Editing</h3>
+       <div class="rounded-2xl p-8" style="background:#16161A;">
+        <p class="text-lg leading-relaxed" style="color:#FFFFFF;">Capcut, Inshot, Filmora, Adobe Studio</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Work -->
+   <section id="work" class="relative w-full" style="background:#0A0A0C;">
+    <div class="max-w-5xl mx-auto px-6 py-28">
+     <div class="scroll-reveal">
+      <h2 class="heading-font font-700 text-4xl md:text-5xl mb-14" style="color:#7C83FF;">Projects</h2>
+     </div><!-- Tab Navigation -->
+     <div class="flex gap-6 mb-12 border-b" style="border-color:rgba(255,255,255,0.1);"><button class="work-tab px-6 py-4 text-sm font-medium transition-all pb-4 active" data-tab="videocreation" style="color:#FFFFFF; border-bottom:2px solid transparent;"> Content Created </button> <button class="work-tab px-6 py-4 text-sm font-medium transition-all pb-4" data-tab="projectscreated" style="color:#FFFFFF; border-bottom:2px solid transparent;"> Projects Created </button>
+     </div><!-- Tab Content -->
+     <div class="work-tab-content"><!-- Video Creation Tab -->
+      <div id="videocreation-tab" class="tab-pane active scroll-reveal">
+       <div class="rounded-2xl p-8" style="background:#16161A;">
+        <p class="text-lg leading-relaxed" style="color:#FFFFFF;">Check my instagram profile for more info...</p>
+       </div>
+      </div>
+      <div id="projectscreated-tab" class="tab-pane hidden scroll-reveal">
+       <div class="rounded-2xl p-8 mb-8" style="background:#16161A;">
+        <h3 class="heading-font font-600 text-2xl mb-4" style="color:#7C83FF;">Ultrasonic Radar - System</h3>
+        <p class="text-lg leading-relaxed" style="color:#FFFFFF;">Data Visualization via GUI Processing, for real time 2D mapping.</p>
+       </div>
+       <div class="rounded-2xl p-8" style="background:#16161A;">
+        <h3 class="heading-font font-600 text-2xl mb-4" style="color:#7C83FF;">Solar Power Bank</h3>
+        <p class="text-lg leading-relaxed" style="color:#FFFFFF;">Emergency Usage, with digital display showing battery percentage.</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Contact -->
+   <section id="contact" class="relative grain-overlay w-full" style="background:#0F0F12;">
+    <div class="relative z-10 max-w-3xl mx-auto px-6 py-28 text-center">
+     <div class="scroll-reveal">
+      <p class="text-sm uppercase tracking-[0.3em] mb-3" style="color:#7C83FF;">Contact</p>
+      <h2 class="heading-font font-700 text-4xl md:text-5xl mb-6" style="color:#F5F5F0;">Let's Connect</h2>
+      <p class="text-lg mb-10" style="color:#FFFFFF;">Have a project in your mind? Let's do it then, Drop me a word and let's get it done.</p>
+     </div><!-- Contact Form -->
+     <div class="scroll-reveal mt-12 max-w-2xl mx-auto">
+      <form class="space-y-6" id="contact-form" style="color:#F5F5F0;">
+       <div><input type="text" placeholder="Your Full Name*" required class="w-full px-6 py-4 rounded-lg text-base font-medium bg-opacity-50 focus:outline-none focus:ring-2 transition-all" style="background:#16161A; color:#7C83FF; border:1px solid rgba(124,131,255,0.2); focus-visible:ring-color:#7C83FF;">
+       </div>
+       <div><input type="email" placeholder="Your Email Address" required class="w-full px-6 py-4 rounded-lg text-base font-medium bg-opacity-50 focus:outline-none focus:ring-2 transition-all" style="background:#16161A; color:#7C83FF; border:1px solid rgba(124,131,255,0.2); focus-visible:ring-color:#7C83FF;">
+       </div>
+       <div><textarea placeholder="Let's see what you got..." rows="6" class="w-full px-6 py-4 rounded-lg text-base font-medium bg-opacity-50 focus:outline-none focus:ring-2 transition-all resize-none" style="background:#16161A; color:#7C83FF; border:1px solid rgba(124,131,255,0.2); focus-visible:ring-color:#7C83FF;"></textarea>
+       </div><button type="submit" class="w-full px-8 py-4 rounded-full font-semibold text-lg transition-all hover:scale-105" style="background:#7C83FF; color:#0A0A0C;">Send Message</button>
+      </form>
+      <div class="flex justify-center gap-8 mt-10"><a href="https://www.linkedin.com/in/vedsinha09" target="_blank" rel="noopener noreferrer" class="transition-all hover:scale-110" style="color:#7C83FF;" aria-label="LinkedIn"><i data-lucide="linkedin" style="width:24px;height:24px;"></i></a> <a href="https://www.instagram.com/ved.official.in" target="_blank" rel="noopener noreferrer" class="transition-all hover:scale-110" style="color:#7C83FF;" aria-label="Instagram"><i data-lucide="instagram" style="width:24px;height:24px;"></i></a> <a href="https://github.com/VedSinha09" target="_blank" rel="noopener noreferrer" class="transition-all hover:scale-110" style="color:#7C83FF;" aria-label="GitHub"><i data-lucide="github" style="width:24px;height:24px;"></i></a>
+      </div>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="w-full border-t py-8 text-center text-sm" style="background:#0A0A0C; border-color:rgba(255,255,255,0.06); color:#555;">
+    <p>© 2025 <span id="footer-name">Ved Sinha</span>, All Rights Reserved</p>
+   </footer>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Scroll reveal
+      const scrollWrap = document.getElementById('portfolio-wrap');
+      function checkReveal() {
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.88) el.classList.add('visible');
+        });
+      }
+      scrollWrap.addEventListener('scroll', checkReveal);
+      checkReveal();
+
+      // Active section highlighting in nav
+      function updateActiveNavLink() {
+        const sections = ['hero', 'about', 'education', 'skills', 'work', 'contact'];
+        const navLinks = {
+          'hero': 'nav-name',
+          'about': 'nav-about',
+          'education': 'nav-education',
+          'skills': 'nav-work',
+          'work': 'nav-portfolio',
+          'contact': 'nav-contact'
+        };
+
+        let currentSection = 'hero';
+        sections.forEach(sectionId => {
+          const section = document.getElementById(sectionId);
+          if (section) {
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+              currentSection = sectionId;
+            }
+          }
+        });
+
+        // Remove active class from all nav links
+        Object.values(navLinks).forEach(id => {
+          const element = document.getElementById(id);
+          if (element) element.classList.remove('active-section');
+        });
+
+        // Add active class to current section's nav link
+        const activeNavLink = document.getElementById(navLinks[currentSection]);
+        if (activeNavLink) activeNavLink.classList.add('active-section');
+      }
+
+      scrollWrap.addEventListener('scroll', updateActiveNavLink);
+      updateActiveNavLink();
+
+      // Skills tabs
+      document.querySelectorAll('.skills-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          const tabName = tab.getAttribute('data-tab');
+          
+          // Remove active from all tabs and hide all panes
+          document.querySelectorAll('.skills-tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.skills-tab-content .tab-pane').forEach(pane => pane.classList.add('hidden'));
+          
+          // Add active to clicked tab and show its pane
+          tab.classList.add('active');
+          document.getElementById(tabName + '-tab').classList.remove('hidden');
+        });
+      });
+
+      // Work tabs
+      document.querySelectorAll('.work-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          const tabName = tab.getAttribute('data-tab');
+          
+          // Remove active from all tabs and hide all panes
+          document.querySelectorAll('.work-tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.work-tab-content .tab-pane').forEach(pane => pane.classList.add('hidden'));
+          
+          // Add active to clicked tab and show its pane
+          tab.classList.add('active');
+          document.getElementById(tabName + '-tab').classList.remove('hidden');
+        });
+      });
+
+      // Form submission
+      const contactForm = document.getElementById('contact-form');
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = this.querySelector('input[type="text"]').value;
+        const email = this.querySelector('input[type="email"]').value;
+        const message = this.querySelector('textarea').value;
+        
+        // Show success message
+        const successMsg = document.createElement('div');
+        successMsg.className = 'success-message';
+        successMsg.textContent = '✓ Message sent successfully!';
+        document.body.appendChild(successMsg);
+        
+        // Reset form
+        contactForm.reset();
+        
+        // Remove message after 3 seconds
+        setTimeout(() => {
+          successMsg.remove();
+        }, 3000);
+      });
+
+      // Initialize Lucide icons
+      lucide.createIcons();
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f08db0e51005484',t:'MTc3NjkwNTIzNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
