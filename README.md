@@ -12,3 +12,6 @@ Alongside my technical journey, I am passionate about creative media. I actively
 
 Top Skills –
 Video Editing
+Web Designing
+
+I have aimed to become "Full-Stack Developer" after the completion of my degree. Right now I am learning new lagnuages to understand logic deeply and coexist with the current ongoing developement and integeration of Artificial Intelligence in the new world...
