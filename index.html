@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ved Sinha - Connect</title>
+    <meta
+      name="description"
+      content="Portfolio website for Ved Sinha, a digital designer, creative developer, and B.Tech student."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <div class="portfolio-wrap" id="portfolio-wrap">
+      <nav class="nav-bar" aria-label="Primary navigation">
+        <div class="nav-inner">
+          <a href="#hero" class="brand">V.S</a>
+          <div class="nav-menu" id="nav-menu">
+            <a href="#about" class="nav-link">About</a>
+            <a href="#education" class="nav-link">Education</a>
+            <a href="#skills" class="nav-link">Skills</a>
+            <a href="#work" class="nav-link">Work</a>
+            <a href="#contact" class="nav-link">Contact</a>
+          </div>
+          <div class="nav-socials">
+            <a href="https://www.linkedin.com/in/vedsinha09" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <i data-lucide="linkedin"></i>
+            </a>
+            <a href="https://www.instagram.com/ved.sinha09/?hl=en" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <i data-lucide="instagram"></i>
+            </a>
+            <a href="https://github.com/VedSinha09" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <i data-lucide="github"></i>
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <main>
+        <section id="hero" class="hero grain-overlay">
+          <div class="glow glow-large"></div>
+          <div class="glow glow-small"></div>
+          <div class="hero-content">
+            <p class="eyebrow anim-fade-up">Hello, I'm</p>
+            <div class="hero-portrait-wrap anim-scale-in">
+              <img
+                class="hero-portrait"
+                src="./assets/ved-sinha-portrait.png"
+                alt="Portrait of Ved Sinha"
+              />
+            </div>
+            <h1 class="hero-title anim-fade-up-d1" id="hero-title">Ved Sinha</h1>
+            <p class="hero-tagline anim-fade-up-d2">Digital Designer & Creative Developer</p>
+            <p class="hero-description anim-fade-up-d3">
+              Leaning into the world of AI, expanding capabilities and creating breathtaking content.
+            </p>
+            <div class="hero-actions anim-fade-up-d4">
+              <a href="#work" class="button button-primary">
+                View Work
+                <i data-lucide="arrow-down"></i>
+              </a>
+              <a href="#contact" class="button button-secondary">
+                Get in Touch
+                <i data-lucide="arrow-down"></i>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section id="about" class="section section-contrast">
+          <div class="section-inner">
+            <div class="scroll-reveal">
+              <h2>A little about me</h2>
+            </div>
+            <div class="about-grid">
+              <div class="scroll-reveal">
+                <p class="body-large">
+                  I am currently pursuing B.Tech at Gautam Buddha University with a strong interest in program
+                  development, web page design, and digital content creation. Over the past four years, I have been
+                  learning multiple programming languages and exploring technologies to strengthen my development and
+                  problem-solving skills.
+                </p>
+              </div>
+              <div class="scroll-reveal">
+                <p class="section-label">Core Skills</p>
+                <div class="pill-list">
+                  <span class="skill-pill">Web Dev</span>
+                  <span class="skill-pill">Video Editor</span>
+                  <span class="skill-pill">Program Developer</span>
+                  <span class="skill-pill">Website Designer</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="education" class="section">
+          <div class="section-inner">
+            <div class="scroll-reveal">
+              <h2 class="accent-heading">Academic Path</h2>
+            </div>
+            <div class="timeline">
+              <article class="education-card scroll-reveal">
+                <div class="education-main">
+                  <i data-lucide="building-2"></i>
+                  <div>
+                    <h3>Gautam Buddha University</h3>
+                    <p>Bachelor of Technology, Computer Science Engineering</p>
+                    <span>Greater Noida, India</span>
+                  </div>
+                </div>
+                <div class="education-meta">
+                  <strong>In Progress</strong>
+                  <span>05 Jul, 2025</span>
+                </div>
+              </article>
+              <article class="education-card scroll-reveal">
+                <div class="education-main">
+                  <i data-lucide="school"></i>
+                  <div>
+                    <h3>Shri Ram Global School</h3>
+                    <p>Higher Secondary School, Mathematics and Computer Science</p>
+                    <span>Greater Noida West, India</span>
+                  </div>
+                </div>
+                <div class="education-meta">
+                  <strong>Completed</strong>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="skills" class="section section-deep">
+          <div class="section-inner">
+            <div class="scroll-reveal">
+              <p class="section-label">Expertise</p>
+              <h2>Core Learning</h2>
+            </div>
+            <div class="tabs-container" role="tablist" aria-label="Skill categories">
+              <button class="tab-button active" type="button" role="tab" aria-selected="true" data-tab="languages">
+                Languages
+              </button>
+              <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab="webdev">
+                Web Development
+              </button>
+              <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab="videoediting">
+                Video Editing
+              </button>
+            </div>
+            <div class="tab-content">
+              <article id="languages-tab" class="tab-pane active scroll-reveal">
+                <h3>Programming Languages</h3>
+                <div class="info-panel">
+                  <p>C, C++, Python, Java, PHP, JavaScript</p>
+                </div>
+              </article>
+              <article id="webdev-tab" class="tab-pane hidden scroll-reveal">
+                <h3>Web Development</h3>
+                <div class="info-panel">
+                  <p>HTML5, CSS3, JavaScript, MySQL</p>
+                </div>
+              </article>
+              <article id="videoediting-tab" class="tab-pane hidden scroll-reveal">
+                <h3>Video Editing</h3>
+                <div class="info-panel">
+                  <p>CapCut, InShot, Filmora, Adobe Studio</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="work" class="section section-deep">
+          <div class="section-inner">
+            <div class="scroll-reveal">
+              <h2 class="accent-heading">Projects</h2>
+            </div>
+            <div class="tabs-container" role="tablist" aria-label="Work categories">
+              <button class="tab-button active" type="button" role="tab" aria-selected="true">Content Created</button>
+            </div>
+            <article class="work-card scroll-reveal">
+              <p>Check my Instagram profile for more info.</p>
+              <div class="work-actions">
+                <a href="https://www.instagram.com/ved.sinha09/?hl=en" target="_blank" rel="noopener noreferrer" class="button button-muted">
+                  <i data-lucide="instagram"></i>
+                  View on Instagram
+                </a>
+                <a
+                  href="https://drive.google.com/drive/folders/1O4vvDKCsFaBq4ldJX5sGEcwprrZnyVBQ?usp=drive_link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="button button-muted"
+                >
+                  <i data-lucide="folder-open"></i>
+                  View on Drive
+                </a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="contact" class="section contact grain-overlay">
+          <div class="contact-inner">
+            <div class="scroll-reveal">
+              <p class="section-label">Contact</p>
+              <h2>Let's Connect</h2>
+              <p class="body-large">Have a project in your mind? Drop me a word and let's get it done.</p>
+            </div>
+            <form class="contact-form scroll-reveal" id="contact-form">
+              <input type="text" name="name" placeholder="Your Full Name*" required />
+              <input type="email" name="email" placeholder="Your Email Address*" required />
+              <textarea name="message" placeholder="Let's see what you got..." rows="6"></textarea>
+              <button type="submit">Send Message</button>
+            </form>
+            <div class="contact-socials">
+              <a href="https://www.linkedin.com/in/vedsinha09" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i data-lucide="linkedin"></i>
+              </a>
+              <a href="https://www.instagram.com/ved.sinha09/?hl=en" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <i data-lucide="instagram"></i>
+              </a>
+              <a href="https://github.com/VedSinha09" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <i data-lucide="github"></i>
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <p>&copy; 2025 Ved Sinha, All Rights Reserved</p>
+      </footer>
+
+      <audio id="background-music" src="./assets/stayin-alive.mp3" preload="auto" loop autoplay></audio>
+      <button class="music-toggle" id="music-toggle" type="button" aria-label="Mute background music" aria-pressed="false">
+        <i data-lucide="volume-2"></i>
+      </button>
+    </div>
+  </body>
+</html>
